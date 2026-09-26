@@ -1,5 +1,5 @@
 from app.models import Hypothesis, Investigation, TimelineEvent
-from app.providers import build_prompt, restore_ids, validate_citations
+from app.providers import OpenAIProvider, build_prompt, restore_ids, validate_citations
 
 
 def test_unknown_citation_dropped_and_reported():
@@ -31,3 +31,27 @@ def test_short_model_ids_restore_to_stable_evidence_ids():
     assert restored.timeline[0].evidence_ids == ["uuid-one"]
     assert restored.hypotheses[0].supporting_ids == ["uuid-one"]
     assert restored.hypotheses[0].contradicting_ids == ["E99"]
+
+
+def test_openai_adapter_uses_shared_schema_and_restores_ids(monkeypatch):
+    captured = {}
+    answer = Investigation(
+        summary="Possible change", insufficient_evidence=True,
+        timeline=[TimelineEvent(event="Change", evidence_ids=["E1"])],
+        hypotheses=[Hypothesis(title="Retry", explanation="Maybe", supporting_ids=["E1"], contradicting_ids=[])],
+        missing_information=[], next_checks=[],
+    )
+
+    class FakeResponses:
+        def parse(self, **kwargs):
+            captured.update(kwargs)
+            return type("Response", (), {"output_parsed": answer})()
+
+    monkeypatch.setattr("app.providers.OpenAI", lambda: type("Client", (), {"responses": FakeResponses()})())
+    evidence = [{"id": "uuid-one", "filename": "note.txt", "locator": "text, chunk 1", "content": "retry changed"}]
+    result, seconds = OpenAIProvider().generate("What changed?", evidence)
+    assert captured["text_format"] is Investigation
+    assert captured["model"]
+    assert "[E1]" in captured["input"]
+    assert result.hypotheses[0].supporting_ids == ["uuid-one"]
+    assert seconds >= 0

@@ -75,7 +75,13 @@ Restore only when you intentionally want to replace database contents. Stop API 
 docker compose exec -T db pg_restore -U tracemind -d tracemind --clean --if-exists < tracemind.dump
 ```
 
-Uploaded source files live in the separate `uploads_data` Docker volume; back up that volume separately before moving hosts. A database dump alone does not include the uploaded files.
+Uploaded source files live in the separate `uploads_data` Docker volume. Save them separately before moving hosts:
+
+```sh
+docker compose exec -T api tar -C /data/uploads -czf - . > tracemind-uploads.tar.gz
+```
+
+The database dump alone does not include uploaded files. Both backup commands were checked against the local sample data; restoring is intentionally a separate, destructive recovery step.
 
 ## Public demo access
 

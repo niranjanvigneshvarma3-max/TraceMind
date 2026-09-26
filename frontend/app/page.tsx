@@ -217,7 +217,7 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_310px]">
-            <div className="space-y-4"><div className="flex items-center justify-between"><h2 className="text-xl font-semibold">Evidence stress test</h2><span className="text-xs text-slate-400">{excluded.size} excluded</span></div>
+            <div className="space-y-4"><div className="flex items-center justify-between gap-3"><h2 className="text-xl font-semibold">Evidence stress test</h2><div className="flex items-center gap-3"><span className="text-xs text-slate-400">{excluded.size} excluded</span><button disabled={!excluded.size} onClick={() => setExcluded(new Set())} className="rounded-md border border-white/20 px-2 py-1 text-xs text-slate-200 disabled:cursor-not-allowed disabled:opacity-40">Restore all</button></div></div>
               {ranked.length ? ranked.map((item, index) => <article key={item.title} className="rounded-xl border border-white/10 bg-white/5 p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3"><div><span className="text-xs font-bold uppercase tracking-widest text-teal-300">Rank {index + 1}</span><h3 className="mt-1 text-lg font-semibold">{item.title}</h3></div><div className="rounded-lg bg-[#07131b] px-3 py-2 text-center"><div className="text-xl font-bold text-teal-200">{item.score}</div><div className="text-[10px] uppercase text-slate-400">support score</div></div></div>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{item.explanation}</p>

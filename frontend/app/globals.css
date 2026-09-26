@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root { color-scheme: dark; }
+body { background: #07131b; color: #e7f0f0; font-family: Arial, Helvetica, sans-serif; }
+button, input, select { outline-offset: 3px; }
+button { cursor: pointer; }
+

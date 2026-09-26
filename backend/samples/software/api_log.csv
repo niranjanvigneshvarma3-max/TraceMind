@@ -1,0 +1,17 @@
+time,phase,component,status,error_type,request_id
+08:40,before,checkout,200,none,req-01
+08:42,before,payment-gateway,200,none,req-02
+08:44,before,checkout,200,none,req-03
+08:46,before,payment-gateway,504,timeout,req-04
+09:03,after-deploy,payment-gateway,504,timeout,req-05
+09:04,after-deploy,checkout,500,pool-wait,req-06
+09:05,after-deploy,payment-gateway,504,timeout,req-07
+09:07,after-deploy,checkout,500,pool-wait,req-08
+09:09,after-deploy,payment-gateway,504,timeout,req-09
+09:12,after-deploy,checkout,200,none,req-10
+09:18,after-deploy,checkout,500,pool-wait,req-11
+09:22,after-retry-revert,checkout,200,none,req-12
+09:23,after-retry-revert,payment-gateway,504,timeout,req-13
+09:24,after-retry-revert,checkout,200,none,req-14
+09:25,after-retry-revert,checkout,200,none,req-15
+

@@ -1,0 +1,3 @@
+SYNTHETIC SOFTWARE INCIDENT - deployment note
+09:00 deployment: API release 2.4 went live. Retry limit for payment-gateway calls changed from 2 to 5. The database connection pool setting did not change. A new response-cache feature flag stayed disabled. The release did not change the payment gateway endpoint. This note records configuration, not a measured root cause.
+

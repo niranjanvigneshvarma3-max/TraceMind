@@ -1,0 +1,3 @@
+SYNTHETIC SOFTWARE INCIDENT - investigator notes
+08:45 users reported normal checkout behavior before release 2.4. At 09:08 support reported more failed checkouts. The on-call engineer saw both gateway timeouts and database pool wait warnings. At 09:20 the retry limit was restored from 5 to 2 without rolling back the full deployment. New errors became less frequent in the sampled log, but a few gateway timeouts continued. No independent gateway health report or database saturation metric is available. This sequence supports investigation, not a confirmed cause.
+

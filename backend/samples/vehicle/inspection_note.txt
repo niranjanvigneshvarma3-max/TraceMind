@@ -1,0 +1,3 @@
+SYNTHETIC VEHICLE INSPECTION - prototype batch
+On 12 September, three prototype vehicles were checked after a rotor supplier change. Drivers reported brake-pedal vibration in vehicles V1 and V2 during repeated stops. V3, which used the earlier rotor batch, did not show the same vibration during this short test. Inspection found a runout warning on V1 and V2 rotors. Tire balance was not measured, so it remains an alternative explanation. This small observational sample does not establish a manufacturing defect.
+

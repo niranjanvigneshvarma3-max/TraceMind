@@ -1,0 +1,8 @@
+vehicle,phase,component,result,observation
+V1,new-rotor,brake,vibration,pedal vibration on repeated stops
+V1,new-rotor,rotor,warning,runout warning
+V2,new-rotor,brake,vibration,pedal vibration on repeated stops
+V2,new-rotor,rotor,warning,runout warning
+V3,old-rotor,brake,normal,no vibration in short test
+V3,old-rotor,rotor,normal,no runout warning
+

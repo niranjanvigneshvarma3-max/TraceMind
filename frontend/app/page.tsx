@@ -197,12 +197,18 @@ export default function Home() {
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-7">
           <div className="text-xs font-bold uppercase tracking-widest text-teal-300">{currentCase?.title ?? "Investigation"}</div>
           <h2 className="mt-2 text-2xl font-semibold">Ask a question of the evidence</h2>
+          <p className="mt-2 text-sm text-slate-300">Start with the suggested question or write your own. Model and search settings are available below.</p>
           <textarea value={question} onChange={event => setQuestion(event.target.value)} rows={3}
             className="mt-5 w-full rounded-lg border border-white/20 bg-[#081922] p-4 text-sm leading-6 text-white" />
-          <div className="mt-4 flex flex-wrap items-end gap-3">
-            <label className="text-xs text-slate-300">Generator<select value={provider} onChange={event => setProvider(event.target.value)} className="mt-1 block rounded-lg border border-white/20 bg-[#081922] px-3 py-2 text-sm"><option value="ollama">Local Ollama</option><option value="openai">OpenAI mini</option></select></label>
-            <label className="text-xs text-slate-300">Retrieval<select value={mode} onChange={event => setMode(event.target.value)} className="mt-1 block rounded-lg border border-white/20 bg-[#081922] px-3 py-2 text-sm"><option value="hybrid">Hybrid</option><option value="keyword">Keyword</option><option value="vector">Vector</option></select></label>
+          <div className="mt-4 flex flex-wrap items-start gap-3">
             <button disabled={busy || question.trim().length < 5} onClick={() => void investigate()} className="rounded-lg bg-teal-300 px-5 py-2.5 text-sm font-bold text-slate-950 hover:bg-teal-200 disabled:opacity-50">{busy ? "Investigating…" : "Investigate"}</button>
+            <details className="rounded-lg border border-white/20 bg-[#081922] px-3 py-2 text-sm text-slate-200">
+              <summary className="cursor-pointer">Model and search settings · {provider === "ollama" ? "Local Ollama" : "OpenAI mini"} · {mode}</summary>
+              <div className="mt-3 flex flex-wrap gap-3 pb-1">
+                <label className="text-xs text-slate-300">Generator<select value={provider} onChange={event => setProvider(event.target.value)} className="mt-1 block rounded-lg border border-white/20 bg-[#081922] px-3 py-2 text-sm"><option value="ollama">Local Ollama</option><option value="openai">OpenAI mini</option></select></label>
+                <label className="text-xs text-slate-300">Retrieval<select value={mode} onChange={event => setMode(event.target.value)} className="mt-1 block rounded-lg border border-white/20 bg-[#081922] px-3 py-2 text-sm"><option value="hybrid">Hybrid</option><option value="keyword">Keyword</option><option value="vector">Vector</option></select></label>
+              </div>
+            </details>
           </div>
           {message && <p className="mt-4 rounded-lg border border-rose-400/30 bg-rose-400/10 p-3 text-sm text-rose-200">{message}</p>}
         </div>
